@@ -5,9 +5,11 @@ import com.sms.dto.StudentResponseDTO;
 import com.sms.entity.Student;
 import com.sms.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class StudentServiceImpl implements StudentService{
 
     @Autowired
