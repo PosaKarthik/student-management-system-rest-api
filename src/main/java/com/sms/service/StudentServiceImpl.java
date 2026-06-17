@@ -3,12 +3,14 @@ package com.sms.service;
 import com.sms.dto.StudentRequestDTO;
 import com.sms.dto.StudentResponseDTO;
 import com.sms.entity.Student;
+import com.sms.exception.StudentNotFoundException;
 import com.sms.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentServiceImpl implements StudentService{
@@ -63,7 +65,19 @@ public class StudentServiceImpl implements StudentService{
 
     @Override
     public StudentResponseDTO getById(Integer studentId) {
-        return null;
+
+        Student student=studentRepository.findById(studentId).orElseThrow(() ->
+                new StudentNotFoundException("Student not found with this id : "+studentId)
+        );
+
+        StudentResponseDTO studentResponseDTO=new StudentResponseDTO();
+
+        studentResponseDTO.setStudentId(student.getStudentId());
+        studentResponseDTO.setStudentName(student.getStudentName());
+        studentResponseDTO.setStudentEmail(student.getStudentEmail());
+        studentResponseDTO.setStudentCourse(student.getStudentCourse());
+
+        return studentResponseDTO;
     }
 
     @Override
