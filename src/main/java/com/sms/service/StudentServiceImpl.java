@@ -7,6 +7,7 @@ import com.sms.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -41,7 +42,23 @@ public class StudentServiceImpl implements StudentService{
 
     @Override
     public List<StudentResponseDTO> getAllStudents() {
-        return List.of();
+
+        List<Student> s=studentRepository.findAll();
+
+        List<StudentResponseDTO> studentResponseDTOList=new ArrayList<>();
+
+        for(Student student:s){
+
+            StudentResponseDTO studentResponseDTO=new StudentResponseDTO();
+
+            studentResponseDTO.setStudentId(student.getStudentId());
+            studentResponseDTO.setStudentName(student.getStudentName());
+            studentResponseDTO.setStudentEmail(student.getStudentEmail());
+            studentResponseDTO.setStudentCourse(student.getStudentCourse());
+
+            studentResponseDTOList.add(studentResponseDTO);
+        }
+        return studentResponseDTOList;
     }
 
     @Override
