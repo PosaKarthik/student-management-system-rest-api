@@ -4,8 +4,6 @@ import com.sms.dto.StudentRequestDTO;
 import com.sms.dto.StudentResponseDTO;
 import com.sms.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,6 +36,10 @@ public class StudentController {
         return  ResponseEntity.ok(studentService.getById(studentId));
     }
 
-
+    @PutMapping("/{studentId}")
+    public ResponseEntity<StudentResponseDTO> updateStudent(@PathVariable Integer studentId,
+                                                            @RequestBody StudentRequestDTO studentRequestDTO){
+        return ResponseEntity.ok(studentService.updateStudent(studentId,studentRequestDTO));
+    }
 
 }

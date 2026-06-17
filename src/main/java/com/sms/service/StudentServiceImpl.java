@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class StudentServiceImpl implements StudentService{
@@ -82,7 +82,26 @@ public class StudentServiceImpl implements StudentService{
 
     @Override
     public StudentResponseDTO updateStudent(Integer studentId, StudentRequestDTO studentRequestDTO) {
-        return null;
+
+        Student student=studentRepository.findById(studentId).orElseThrow(
+                () -> new StudentNotFoundException("Student not found with this id : "+studentId)
+        );
+
+        student.setStudentName(studentRequestDTO.getStudentName());
+        student.setStudentEmail(studentRequestDTO.getStudentEmail());
+        student.setStudentCourse(student.getStudentCourse());
+
+        Student savedStudent=studentRepository.save(student);
+
+        StudentResponseDTO studentResponseDTO=new StudentResponseDTO();
+
+        studentResponseDTO.setStudentId(savedStudent.getStudentId());
+        studentResponseDTO.setStudentName(savedStudent.getStudentName());
+        studentResponseDTO.setStudentEmail(savedStudent.getStudentEmail());
+        studentResponseDTO.setStudentCourse(savedStudent.getStudentCourse());
+
+
+        return studentResponseDTO;
     }
 
     @Override
