@@ -249,7 +249,7 @@ or run:
 ### Open Swagger UI
 
 ```text
-http://localhost:8080/swagger-ui/index.html
+http://localhost:9090/swagger-ui/index.html
 ```
 
 ---
