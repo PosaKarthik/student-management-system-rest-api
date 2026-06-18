@@ -105,7 +105,12 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public void delete(Integer studentId) {
+    public void deleteStudent(Integer studentId) {
 
+        Student s=studentRepository.findById(studentId).orElseThrow(
+                () -> new StudentNotFoundException("Student not found with this id : "+studentId)
+        );
+
+        studentRepository.deleteById(studentId);
     }
 }

@@ -15,5 +15,5 @@ public interface StudentService {
 
     StudentResponseDTO updateStudent(Integer studentId,StudentRequestDTO studentRequestDTO);
 
-    void delete(Integer studentId);
+    void deleteStudent(Integer studentId);
 }

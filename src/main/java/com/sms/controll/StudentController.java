@@ -42,4 +42,10 @@ public class StudentController {
         return ResponseEntity.ok(studentService.updateStudent(studentId,studentRequestDTO));
     }
 
+    @DeleteMapping("/{studentId}")
+    public ResponseEntity<String> deleteStudent(@PathVariable Integer studentId){
+        studentService.deleteStudent(studentId);
+        return ResponseEntity.ok("Student deleted successfully");
+    }
+
 }
